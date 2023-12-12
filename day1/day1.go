@@ -17,10 +17,12 @@ func main() {
 		result += c
 	}
 
-	fmt.Println(result)
+	fmt.Printf("final result: %v", result)
 }
 
 func CalibrationValues(input string) (int, error) {
+	input = replaceStrings(input)
+
 	split := strings.Split(input, "")
 	var n []int
 	for _, v := range split {
@@ -40,8 +42,35 @@ func CalibrationValues(input string) (int, error) {
 	return result, nil
 }
 
+func replaceStrings(input string) string {
+	r := strings.NewReplacer(
+		"oneight", "oneeight",
+		"twone", "twoone",
+		"threeight", "threeeight",
+		"fiveight", "fiveeight",
+		"sevenine", "sevennine",
+		"eightwo", "eighttwo",
+		"nineight", "nineeight",
+	)
+	input = r.Replace(input)
+
+	replacer := strings.NewReplacer(
+		"one", "1",
+		"two", "2",
+		"three", "3",
+		"four", "4",
+		"five", "5",
+		"six", "6",
+		"seven", "7",
+		"eight", "8",
+		"nine", "9")
+
+	input = replacer.Replace(input)
+	return input
+}
+
 func openFile() []string {
-	input, _ := os.Open("input.txt")
+	input, _ := os.Open("part2Data.txt")
 	defer input.Close()
 
 	fileScanner := bufio.NewScanner(input)

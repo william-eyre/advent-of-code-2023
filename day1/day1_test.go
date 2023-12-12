@@ -38,6 +38,14 @@ func TestCalibrationValues(t *testing.T) {
 			want:    77,
 			wantErr: false,
 		},
+		{
+			name: "should be able to read numbers when they are spelled",
+			args: args{
+				input: "eightwo",
+			},
+			want:    82,
+			wantErr: false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
